@@ -7,21 +7,7 @@
       <%= render "books/form", book: @book %>
     </div>
     <div class="col-md-8 offset-md-1">
-      <h2>Groups</h2>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><%= image_tag @group.get_groups_image, size:"80x80"%>  </td>
-            <td><%= @group.name %></td>
-            <td><%= @group.introduction %></td>
-            <td>
-              <% if @group.owner_id == current_user.id %>
-                <%= link_to "Edit", edit_group_path(@group), class:"btn btn-success"%>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <%= render "group_show", group: @group%>
     </div>
   </div>
 </div>

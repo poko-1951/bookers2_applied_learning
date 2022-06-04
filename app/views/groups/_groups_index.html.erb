@@ -1,9 +1,10 @@
-<table class="table">
+<table class="table text-center">
   <thead>
     <tr>
       <th></th>
       <th>グループ名</th>
       <th>紹介文</th>
+      <th>メンバー数</th>
       <th></th>
     </tr>
   </thead>
@@ -17,9 +18,11 @@
         </td>
         <td><%= link_to group.name, group_path(group) %></td>
         <td><%= group.introduction %></td>
+        <td><%= group.users.count%></td>
         <td>
           <% if group.owner_id == current_user.id %>
-            <%= link_to "Edit", edit_group_path(group), class:"btn btn-success"%>
+            <%= link_to "Edit", edit_group_path(group), class:"btn btn-success mr-5"%>
+            <%= link_to "Destroy", group_path(group), method: :delete, data: { confirm: "本当に削除しますか？"}, class:"btn btn-danger"  %>
           <% end %>
         </td>
       </tr>
