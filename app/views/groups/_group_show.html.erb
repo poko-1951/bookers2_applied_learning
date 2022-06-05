@@ -22,6 +22,7 @@
       <td>
         <% if group.owner_id == current_user.id %>
           <%= link_to "Edit", edit_group_path(group), class:"btn btn-success"%>
+          <%= link_to "Notice an Event", group_new_mail_path(@group), class:"btn btn-info" %>
         <% elsif group.users.include?(current_user) %>
           <%= link_to "Leave this group", group_leave_path(group), method: :delete, data: { confirm: "本当にこのグループを抜けますか？"}, class:"btn btn-danger" %>
         <% else %>
