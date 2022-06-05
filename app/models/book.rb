@@ -36,4 +36,13 @@ class Book < ApplicationRecord
   scope :created_4days, -> { where(created_at: 4.days.ago.all_day) } 
   scope :created_5days, -> { where(created_at: 5.days.ago.all_day) } 
   scope :created_6days, -> { where(created_at: 6.days.ago.all_day) } 
+
+  scope :favorite, -> (from, to){sort{
+    |a,b| 
+      b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
+      a.favorited_users.includes(:favorites).where(created_at: from...to).size
+  }}
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+  scope :evaluation_count, -> {order(evaluation: :desc)}
 end

@@ -10,11 +10,13 @@ class BooksController < ApplicationController
     @book = Book.new
     to = Time.current.at_end_of_day
     from = (to-6.day).at_beginning_of_day
-    @books = Book.includes(:favorited_users).sort{
-      |a,b| 
-        b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
-        a.favorited_users.includes(:favorites).where(created_at: from...to).size
-    }
+    if params[:old] #いいね順番はscopeで用意しておいて、ここでは外してある
+      @books = Book.all.old
+    elsif params[:evaluation_count]
+      @books = Book.all.evaluation_count
+    else
+      @books = Book.all.latest
+    end
   end
 
   def create

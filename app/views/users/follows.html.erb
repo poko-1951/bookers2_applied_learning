@@ -1,5 +1,5 @@
 <h2>Follow Users</h2>
-<% if current_user.following.count == 0 %>
+<% if current_user.followings.count == 0 %>
 <p>ユーザーはいません</p>
 <% else %>
   <table class="table">
@@ -15,7 +15,7 @@
       <tr>
         <td><%= image_tag user.get_profile_image, size: "50x50" %></td>
         <td><%= user.name %></td>
-        <td>フォロー数:<%= user.following.count %></td>
+        <td>フォロー数:<%= user.followings.count %></td>
         <td>フォロワー数:<%= user.followers.count %></td>
         <td><%= link_to "Show", user_path(user) %></td>
       </tr>

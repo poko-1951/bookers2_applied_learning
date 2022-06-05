@@ -5,11 +5,7 @@ class FavoritesController < ApplicationController
     favorite.save
     to = Time.current.at_end_of_day
     from = (to-6.day).at_beginning_of_day
-    @books = Book.includes(:favorited_users).sort{
-      |a,b| 
-        b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
-        a.favorited_users.includes(:favorites).where(created_at: from...to).size
-    }
+    @books = Book.all
     render "create_and_destroy"
     # redirect_to request.referer
   end
@@ -20,11 +16,7 @@ class FavoritesController < ApplicationController
     favorite.destroy
     to = Time.current.at_end_of_day
     from = (to-6.day).at_beginning_of_day
-    @books = Book.includes(:favorited_users).sort{
-      |a,b| 
-        b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
-        a.favorited_users.includes(:favorites).where(created_at: from...to).size
-    }
+    @books = Book.all
     render "create_and_destroy"
     # redirect_to request.referer
   end
