@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_one_attached :profile_image
 
   has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id, dependent: :destroy
-  has_many :following, through: :active_relationships, source: :follower, dependent: :destroy
+  has_many :followings, through: :active_relationships, source: :follower, dependent: :destroy
 
   has_many :passive_relationships, class_name: "Relationship", foreign_key: :follower_id, dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :following, dependent: :destroy
@@ -31,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def followed_by?(user)
-    passive_relationships.exists?(following_id: user.id)
+    followings.include?(user)
   end
 
   def self.looks(search, word)
