@@ -25,6 +25,10 @@ class Book < ApplicationRecord
     end
   end
 
+  def self.search(search_word)
+    Book.where(['category LIKE ?', "#{search_word}"])
+  end
+
   scope :created_today, -> { where(created_at: Time.zone.now.all_day) } 
   scope :created_yesterday, -> { where(created_at: 1.days.ago.all_day) } 
   scope :created_this_week, -> { where(created_at: 6.days.ago.beginning_of_day..Time.zone.now.end_of_day) } 
