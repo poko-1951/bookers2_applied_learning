@@ -48,4 +48,14 @@ class User < ApplicationRecord
     end
   end
   
+  def self.guest
+    find_or_create_by!(name:"guestuser", email:"guest@example.com") do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
+
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 end

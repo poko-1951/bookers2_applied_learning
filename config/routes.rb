@@ -6,8 +6,14 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about"
   get "search" => "searches#search"
   get "search_category" => "books#search_category"
+  get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+  patch '/users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
 
   devise_for :users
+
+  devise_scope :user do
+    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+  end
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resource :favorites, only: [:create, :destroy]

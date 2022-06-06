@@ -55,6 +55,20 @@ class UsersController < ApplicationController
     render :post_search
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+  end
+
+  def withdrawal
+    @user = User.find(params[:id])
+    # is_deletedカラムをtrueに変更することにより削除フラグを立てる
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
+  end
+
   private
 
   def user_params
@@ -63,8 +77,8 @@ class UsersController < ApplicationController
 
   def ensure_correct_user
     @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to user_path(current_user)
+    if @user != current_user || @user.name == "guestuser"
+      redirect_to user_path(current_user), notice: "このユーザーの編集画面は表示できません"
     end
   end
 end
