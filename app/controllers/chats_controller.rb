@@ -13,8 +13,8 @@ class ChatsController < ApplicationController
     else
       @room = entries.room
     end
-  @chats = @room.chats
-  @chat = Chat.new(room_id: @room.id)
+    @chats = @room.chats
+    @chat = Chat.new(room_id: @room.id)
   end
 
   def create

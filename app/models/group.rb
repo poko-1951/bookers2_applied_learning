@@ -5,8 +5,7 @@ class Group < ApplicationRecord
 
   validates :name, presence: true
 
-
   def get_groups_image
-    (group_image.attached?) ? group_image : "no-image-icon.jpg"
+    group_image.attached? ? group_image : "no-image-icon.jpg"
   end
 end

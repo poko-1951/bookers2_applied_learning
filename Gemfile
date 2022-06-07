@@ -59,4 +59,4 @@ gem 'devise'
 gem "jquery-rails"
 gem "chartkick"
 gem "pry-rails"
-
+gem "rubocop-airbnb"

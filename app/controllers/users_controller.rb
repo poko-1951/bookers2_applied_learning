@@ -5,11 +5,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @book = Book.new
     @books = @user.books.reverse_order
-    @today_book =  @books.created_today
+    @today_book = @books.created_today
     @yesterday_book = @books.created_yesterday
     @this_week_book = @books.created_this_week
     @last_week_book = @books.created_last_week
-
   end
 
   def index
@@ -44,7 +43,7 @@ class UsersController < ApplicationController
 
   def search
     @user = User.find(params[:user_id])
-    @search_book = @user.books 
+    @search_book = @user.books
     @book = Book.new
     if params[:created_at] == ""
       @search_books = "日付を選択してください"
