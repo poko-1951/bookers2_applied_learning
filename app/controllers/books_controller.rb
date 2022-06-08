@@ -7,8 +7,8 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    to = Time.current.at_end_of_day
-    from = (to - 6.day).at_beginning_of_day
+    # to = Time.current.at_end_of_day
+    # from = (to - 6.day).at_beginning_of_day
     if params[:old] # いいね順番はscopeで用意しておいて、ここでは外してある
       @books = Book.all.old
     elsif params[:evaluation_count]
