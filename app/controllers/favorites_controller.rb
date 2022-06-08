@@ -4,7 +4,7 @@ class FavoritesController < ApplicationController
     favorite = current_user.favorites.new(book_id: @book.id)
     favorite.save
     to = Time.current.at_end_of_day
-    from = (to-6.day).at_beginning_of_day
+    from = (to - 6.day).at_beginning_of_day
     @books = Book.all
     render "create_and_destroy"
     # redirect_to request.referer
@@ -15,10 +15,9 @@ class FavoritesController < ApplicationController
     favorite = current_user.favorites.find_by(book_id: @book.id)
     favorite.destroy
     to = Time.current.at_end_of_day
-    from = (to-6.day).at_beginning_of_day
+    from = (to - 6.day).at_beginning_of_day
     @books = Book.all
     render "create_and_destroy"
     # redirect_to request.referer
   end
-  
 end
